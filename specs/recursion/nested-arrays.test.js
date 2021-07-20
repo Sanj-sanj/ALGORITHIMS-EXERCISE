@@ -11,9 +11,17 @@
 
 function nestedAdd(array) {
   // write code here
+  if(!Array.isArray(array)) return array;
+  let computed = array.reduce((acc,curr) => {
+    if(Array.isArray(curr)) {
+      curr = nestedAdd(curr)
+    }
+    return acc = acc + curr
+  }, 0)
+  return computed
 }
 
-test.skip("nested arrays addition", () => {
+test("nested arrays addition", () => {
   expect(nestedAdd([1, 2, 3])).toEqual(6);
   expect(nestedAdd([1, [2], 3])).toEqual(6);
   expect(nestedAdd([[[[[[[[[5]]]]]]]]])).toEqual(5);
